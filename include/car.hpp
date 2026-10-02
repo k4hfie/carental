@@ -12,20 +12,24 @@ private:
     int capacity;
     int daily_rate;
 protected:
+    //helper functoin
+    bool isNegative(int num, const std::string& type) const;
+
+    //get functions
     int getCapacity() const;
     int getLicensePlate() const;
     int getYear() const;
     std::string getName() const;
     bool getAvailability() const;
     int getDailyRate() const;
-    bool isNegative(int num, const std::string& message) const;
+    
 public:
     Car(int license, int yr, int caps, const std::string& n, int rate);
     virtual ~Car();
     virtual void displayData() const = 0;
     void changeRate(int new_rate);
     void setAvailability(bool avail);
-    int calculateprice(int totaldays) const;
+    double calculatePrice(int totaldays) const;
     virtual double penalty(int extradays) const = 0;
 };
 
