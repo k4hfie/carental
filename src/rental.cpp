@@ -5,7 +5,7 @@ bool Rental::isCarAvaliable(std::unique_ptr<Car>& car){
     return car->getAvailability();
 }
 
-double Rental::calculateTotal(std::vector<std::unique_ptr<Car>>& cart){
+double Rental::calculateTotal(){
     double total = 0;
     for (auto& item : cart){
         total += item->calculatePrice();
@@ -13,8 +13,8 @@ double Rental::calculateTotal(std::vector<std::unique_ptr<Car>>& cart){
     return total;
 }
 
-void Rental::displayOptions(std::vector<std::unique_ptr<Car>>& cars){
-    std::cout << "\t\t DISPLAY\n";
+void Rental::displayCars() const{
+    std::cout << "\t\t CAR DISPLAY\n";
     std::cout << "--------------------------------------------\n";
     for (auto& item : cars){
         item->displayData();
@@ -22,7 +22,7 @@ void Rental::displayOptions(std::vector<std::unique_ptr<Car>>& cars){
     }
 }
 
-void Rental::rentCar(std::vector<std::unique_ptr<Car>>& cart, std::unique_ptr<Car> car){
+void Rental::rentCar(std::unique_ptr<Car> car){
     if (!isCarAvaliable(car)){
         std::cout << "error: Car not Avaliable!\n";
         return;
@@ -38,8 +38,8 @@ void Rental::rentCar(std::vector<std::unique_ptr<Car>>& cart, std::unique_ptr<Ca
     cart.push_back(std::move(car));
 }
 
-void Rental::processBill(std::vector<std::unique_ptr<Car>>& cart){
-    double total = calculateTotal(cart);
+void Rental::processBill(){
+    double total = calculateTotal();
 
     std::cout << "\t\t BILL\n";
     std::cout << "--------------------------------------------\n";
@@ -50,9 +50,9 @@ void Rental::processBill(std::vector<std::unique_ptr<Car>>& cart){
     std::cout << "Total:\t\t\t$" << total <<"\n";
 }
 
-void Rental::processPayment(std::vector<std::unique_ptr<Car>>& cart){
+void Rental::processPayment(){
     int choice;
-    double amount = calculateTotal(cart);
+    double amount = calculateTotal();
     std::unique_ptr<Payment> payment;
 
     std::cout << "\nWhich payment method would you like to use?\n";
@@ -99,7 +99,7 @@ void Rental::processPayment(std::vector<std::unique_ptr<Car>>& cart){
     payment->pay(amount);
 }
 
-void Rental::processRental(std::vector<std::unique_ptr<Car>>& cart){
-    processBill(cart);
-    processPayment(cart);
+void Rental::processRental(){
+    processBill();
+    processPayment();
 }

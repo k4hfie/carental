@@ -182,7 +182,7 @@ void ElectricCar::displayData() const {
     std::cout << "Year:\t\t\t" << getYear() << "\n";
     std::cout << "Daily Rate:\t\t$" << getDailyRate() << "\n";
     std::cout << "Plug Type:\t\t" << plug_type << "\n";
-    std::cout << "Charging Time:\t\t" << charging_time << "hours\n";
+    std::cout << "Charging Time:\t\t" << charging_time << " Hours\n";
 }
 
 void LuxuryCar::displayData() const {
@@ -202,5 +202,5 @@ void EconomyCar::displayData() const {
     std::cout << "Year:\t\t\t" << getYear() << "\n";
     std::cout << "Daily Rate:\t\t$" << getDailyRate() << "\n";
     std::cout << "Transmission Type:\t" << transmission_type << "\n";
-    std::cout << "Trunk Capacity:\t\t" << trunk_cap << "L\n";
+    std::cout << "Trunk Capacity:\t\t" << trunk_cap << " L\n";
 }

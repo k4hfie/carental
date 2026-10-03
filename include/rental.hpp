@@ -7,17 +7,25 @@
 #include <memory>
 
 class Rental {
+private:
+    std::vector<std::unique_ptr<Car>>& cars;
+    std::vector<std::unique_ptr<Car>>& cart;
+
 protected:    
-    static bool isCarAvaliable(std::unique_ptr<Car>& cars);
-    static double calculateTotal(std::vector<std::unique_ptr<Car>>& cart);
+    bool isCarAvaliable(std::unique_ptr<Car>& car);
+    double calculateTotal();
 
 public:
-    static void displayOptions(std::vector<std::unique_ptr<Car>>& cars);
-    static void rentCar(std::vector<std::unique_ptr<Car>>& cart, std::unique_ptr<Car> car);
+    Rental(std::vector<std::unique_ptr<Car>>& cs, std::vector<std::unique_ptr<Car>>& cr):
+        cars(cs), cart(cr)
+    {}
 
-    static void processBill(std::vector<std::unique_ptr<Car>>& cart);
-    static void processPayment(std::vector<std::unique_ptr<Car>>& cart);
-    static void processRental(std::vector<std::unique_ptr<Car>>& cart);
+    void displayCars() const;
+    void rentCar(std::unique_ptr<Car> car);
+
+    void processBill();
+    void processPayment();
+    void processRental();
 };
 
 #endif
