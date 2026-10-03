@@ -38,18 +38,6 @@ void Rental::rentCar(std::vector<std::unique_ptr<Car>>& cart, std::unique_ptr<Ca
     cart.push_back(std::move(car));
 }
 
-void Rental::displayCart(std::vector<std::unique_ptr<Car>>& cart){
-    for (auto& item : cart){
-        std::cout << "\t\t CART\n";
-        std::cout << "--------------------------------------------\n";
-        std::cout << item->getName() << "\n";
-    }
-}
-
-void Rental::emptyCart(std::vector<std::unique_ptr<Car>>& cart){
-    cart.clear();
-}
-
 void Rental::processBill(std::vector<std::unique_ptr<Car>>& cart){
     double total = calculateTotal(cart);
 
