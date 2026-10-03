@@ -2,6 +2,7 @@
 #define PAYMENT_HPP
 
 #include <string>
+#include <memory>
 
 class Payment {
 public:
@@ -21,10 +22,10 @@ public:
 
 class BankTransfer : public Payment {
 private:
-    long bankAccount;
+    int bankNumber;
 
 public:
-    BankTransfer(long ba);
+    BankTransfer(int ba);
     void pay(double amount) override;
 };
 

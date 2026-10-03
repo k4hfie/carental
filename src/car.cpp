@@ -12,25 +12,26 @@ bool Car::isNegative(int num, const std::string& type) const {
 }
 
 Car::Car(
-    int license,
-    int yr,
+    int license, int yr,
     int caps,
     const std::string& n,
-    int rate
+    int rate,
+    int days
 ):
     license_plate(license),
     year(yr),
     available(true),
     name(n),
     capacity(caps),
-    daily_rate(rate)
+    daily_rate(rate),
+    total_days(days)
 {
     // Checks for negative values;
     if (isNegative(license, "License plate")) {
         license_plate = 0;
     }
 
-    if (isNegative(yr, "year")) {
+    if (isNegative(yr, "Year")) {
         year = 0;
     }
 
@@ -40,6 +41,10 @@ Car::Car(
 
     if (isNegative(rate, "Daily rate")) {
         daily_rate = 0;
+    }
+
+    if (isNegative(days, "Days")) {
+        total_days = 0;
     }
 }
 
@@ -74,12 +79,12 @@ void Car::setAvailability(bool avail) {
     available = avail;
 }
 
-double Car::calculatePrice(int totaldays) const {
-    if (isNegative(totaldays, "Total days")) {
-        return 0;
-    }
+void Car::setDay(int day) {
+    total_days = day;
+}
 
-    return totaldays * daily_rate;
+double Car::calculatePrice() const {
+    return total_days * daily_rate;
 }
 
 void Car::changeRate(int new_rate) {
@@ -97,15 +102,16 @@ ElectricCar::ElectricCar(
     int caps,
     const std::string& name,
     int dailyrate,
+    int days,
     const std::string& plug_type,
     double charge
 ) :
-    Car(license, year, caps, name, dailyrate),
+    Car(license, year, caps, name, dailyrate, days),
     plug_type(plug_type),
     charging_time(charge)
 {
     if(isNegative(charge, "Charge")){
-        charge = 0;
+        charging_time = 0;
     }
 }
 
@@ -115,10 +121,11 @@ LuxuryCar::LuxuryCar(
     int caps,
     const std::string& name,
     int dailyrate,
+    int days,
     bool includes_driver,
     bool leather_interior
 ) :
-    Car(license, year, caps, name, dailyrate),
+    Car(license, year, caps, name, dailyrate, days),
     includes_driver(includes_driver),
     leather_interior(leather_interior)
 {}
@@ -129,10 +136,11 @@ EconomyCar::EconomyCar(
     int caps,
     const std::string& name,
     int dailyrate,
+    int days,
     const std::string& transmission_type,
     int trunk_capacity
 ) :
-    Car(license, year, caps, name, dailyrate),
+    Car(license, year, caps, name, dailyrate, days),
     transmission_type(transmission_type),
     trunk_cap(trunk_capacity)
 {
@@ -168,28 +176,31 @@ double EconomyCar::penalty(int extradays) const {
 }
 
 void ElectricCar::displayData() const {
-    std::cout << "Electric Car: " << getName() << "\n";
-    std::cout << "License Plate: " << getLicensePlate() << "\n";
-    std::cout << "Year: " << getYear() << "\n";
-    std::cout << "Daily Rate: $" << getDailyRate() << "\n";
-    std::cout << "Plug Type: " << plug_type << "\n";
-    std::cout << "Charging Time: " << charging_time << " hours\n";
+    std::cout << "\tELECTRIC CAR\n";
+    std::cout << "Name:\t\t\t" << getName() << "\n";
+    std::cout << "License Plate:\t\t" << getLicensePlate() << "\n";
+    std::cout << "Year:\t\t\t" << getYear() << "\n";
+    std::cout << "Daily Rate:\t\t$" << getDailyRate() << "\n";
+    std::cout << "Plug Type:\t\t" << plug_type << "\n";
+    std::cout << "Charging Time:\t\t" << charging_time << "hours\n";
 }
 
 void LuxuryCar::displayData() const {
-    std::cout << "Luxury Car: " << getName() << "\n";
-    std::cout << "License Plate: " << getLicensePlate() << "\n";
-    std::cout << "Year: " << getYear() << "\n";
-    std::cout << "Daily Rate: $" << getDailyRate() << "\n";
-    std::cout << "Includes Driver: " << (includes_driver ? "Yes\n" : "No\n");
-    std::cout << "Leather Interior: " << (leather_interior ? "Yes\n" : "No\n");
+    std::cout << "\t LUXURY CAR\n";
+    std::cout << "Name:\t\t\t" << getName() << "\n";
+    std::cout << "License Plate:\t\t" << getLicensePlate() << "\n";
+    std::cout << "Year:\t\t\t" << getYear() << "\n";
+    std::cout << "Daily Rate:\t\t$" << getDailyRate() << "\n";
+    std::cout << "Includes Driver:\t" << (includes_driver ? "Yes\n" : "No\n");
+    std::cout << "Leather Interior:\t" << (leather_interior ? "Yes\n" : "No\n");
 }
 
 void EconomyCar::displayData() const {
-    std::cout << "Economy Car: " << getName() << "\n";
-    std::cout << "License Plate: " << getLicensePlate() << "\n";
-    std::cout << "Year: " << getYear() << "\n";
-    std::cout << "Daily Rate: $" << getDailyRate() << "\n";
-    std::cout << "Transmission Type: " << transmission_type << "\n";
-    std::cout << "Trunk Capacity: " << trunk_cap << " liters\n";
+    std::cout << "\t ECONOMY CAR\n";
+    std::cout << "Name:\t\t\t" << getName() << "\n";
+    std::cout << "License Plate:\t\t" << getLicensePlate() << "\n";
+    std::cout << "Year:\t\t\t" << getYear() << "\n";
+    std::cout << "Daily Rate:\t\t$" << getDailyRate() << "\n";
+    std::cout << "Transmission Type:\t" << transmission_type << "\n";
+    std::cout << "Trunk Capacity:\t\t" << trunk_cap << "L\n";
 }

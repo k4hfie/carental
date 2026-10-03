@@ -11,6 +11,8 @@ private:
     std::string name;
     int capacity;
     int daily_rate;
+    int total_days;
+    
 protected:
     //helper functoin
     bool isNegative(int num, const std::string& type) const;
@@ -24,13 +26,17 @@ protected:
     int getDailyRate() const;
     
 public:
-    Car(int license, int yr, int caps, const std::string& n, int rate);
+    Car(int license, int yr, int caps, const std::string& n, int rate, int days);
     virtual ~Car();
     virtual void displayData() const = 0;
     void changeRate(int new_rate);
     void setAvailability(bool avail);
-    double calculatePrice(int totaldays) const;
+    void setDay(int days);
+    double calculatePrice() const;
     virtual double penalty(int extradays) const = 0;
+
+    friend class Cart;
+    friend class Rental;
 };
 
 class ElectricCar : public Car {
@@ -45,6 +51,7 @@ public:
         int caps,
         const std::string& name,
         int daily_rate,
+        int days,
         const std::string& plug_type,
         double charging_time
     );
@@ -65,6 +72,7 @@ public:
         int caps,
         const std::string& name,
         int daily_rate,
+        int days,
         bool includes_driver,
         bool leather_interior
     );
@@ -85,6 +93,7 @@ public:
         int caps,
         const std::string& name,
         int daily_rate,
+        int days,
         const std::string& transmission_type,
         int trunk_capacity
     );
