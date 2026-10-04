@@ -21,7 +21,7 @@ public:
     {}
 
     void displayCars() const;
-    void rentCar(std::unique_ptr<Car> car);
+    void rentCar(std::unique_ptr<Car>& car);
 
     void processBill();
     void processPayment();

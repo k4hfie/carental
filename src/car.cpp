@@ -15,16 +15,14 @@ Car::Car(
     int license, int yr,
     int caps,
     const std::string& n,
-    int rate,
-    int days
+    int rate
 ):
     license_plate(license),
     year(yr),
     available(true),
     name(n),
     capacity(caps),
-    daily_rate(rate),
-    total_days(days)
+    daily_rate(rate)
 {
     // Checks for negative values;
     if (isNegative(license, "License plate")) {
@@ -41,10 +39,6 @@ Car::Car(
 
     if (isNegative(rate, "Daily rate")) {
         daily_rate = 0;
-    }
-
-    if (isNegative(days, "Days")) {
-        total_days = 0;
     }
 }
 
@@ -75,10 +69,6 @@ bool Car::getAvailability() const {
     return available;
 }
 
-void Car::setAvailability(bool avail) {
-    available = avail;
-}
-
 void Car::setDay(int day) {
     total_days = day;
 }
@@ -102,11 +92,10 @@ ElectricCar::ElectricCar(
     int caps,
     const std::string& name,
     int dailyrate,
-    int days,
     const std::string& plug_type,
     double charge
 ) :
-    Car(license, year, caps, name, dailyrate, days),
+    Car(license, year, caps, name, dailyrate),
     plug_type(plug_type),
     charging_time(charge)
 {
@@ -121,11 +110,10 @@ LuxuryCar::LuxuryCar(
     int caps,
     const std::string& name,
     int dailyrate,
-    int days,
     bool includes_driver,
     bool leather_interior
 ) :
-    Car(license, year, caps, name, dailyrate, days),
+    Car(license, year, caps, name, dailyrate),
     includes_driver(includes_driver),
     leather_interior(leather_interior)
 {}
@@ -136,43 +124,16 @@ EconomyCar::EconomyCar(
     int caps,
     const std::string& name,
     int dailyrate,
-    int days,
     const std::string& transmission_type,
     int trunk_capacity
 ) :
-    Car(license, year, caps, name, dailyrate, days),
+    Car(license, year, caps, name, dailyrate),
     transmission_type(transmission_type),
     trunk_cap(trunk_capacity)
 {
     if (isNegative(trunk_cap, "Trunk capacity")){
         trunk_cap = 0;
     }
-}
-
-
-// Override functions of child classes
-double ElectricCar::penalty(int extradays) const {
-    if (isNegative(extradays, "Extra Days")) {
-        return 0.0;
-    }
-
-    return extradays * getDailyRate() * 1.0;
-}
-
-double LuxuryCar::penalty(int extradays) const {
-    if (isNegative(extradays, "Extra Days")) {
-        return 0.0;
-    }
-
-    return extradays * getDailyRate() * 2.5;
-}
-
-double EconomyCar::penalty(int extradays) const {
-    if (isNegative(extradays, "Extra Days")) {
-        return 0.0;
-    }
-
-    return extradays * getDailyRate() * 0.5;
 }
 
 void ElectricCar::displayData() const {

@@ -22,7 +22,7 @@ void Rental::displayCars() const{
     }
 }
 
-void Rental::rentCar(std::unique_ptr<Car> car){
+void Rental::rentCar(std::unique_ptr<Car>& car){
     if (!isCarAvaliable(car)){
         std::cout << "error: Car not Avaliable!\n";
         return;
@@ -56,7 +56,7 @@ void Rental::processPayment(){
     std::unique_ptr<Payment> payment;
 
     std::cout << "\nWhich payment method would you like to use?\n";
-    std::cout << "1. Credit Card, 2. Bank Transfer, 3. EWallet\n";
+    std::cout << "1. Credit Card, 2. Bank Transfer, 3. EWallet, 4. Exit First\n";
     std::cout << "--------------------------------------------\n";
     std::cout << "Enter: "; std::cin >> choice; std::cout << "\n";
 
@@ -90,6 +90,10 @@ void Rental::processPayment(){
             payment = std::make_unique<EWallet>(pn, pi);
             break;
         }
+
+        case 4:
+            std::cout << "Exiting payment process.\n";
+            return;
 
         default:
             std::cout << "error: Invalid payment option!\n";

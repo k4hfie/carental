@@ -22,19 +22,16 @@ protected:
     int getLicensePlate() const;
     int getYear() const;
     std::string getName() const;
-    bool getAvailability() const;
     int getDailyRate() const;
+    bool getAvailability() const;
     
 public:
-    Car(int license, int yr, int caps, const std::string& n, int rate, int days);
+    Car(int license, int yr, int caps, const std::string& n, int rate);
     virtual ~Car();
     virtual void displayData() const = 0;
     void changeRate(int new_rate);
-    void setAvailability(bool avail);
     void setDay(int days);
     double calculatePrice() const;
-    virtual double penalty(int extradays) const = 0;
-
     friend class Cart;
     friend class Rental;
 };
@@ -51,12 +48,10 @@ public:
         int caps,
         const std::string& name,
         int daily_rate,
-        int days,
         const std::string& plug_type,
         double charging_time
     );
 
-    double penalty(int extradays) const override;
     void displayData() const override;
 };
 
@@ -72,12 +67,9 @@ public:
         int caps,
         const std::string& name,
         int daily_rate,
-        int days,
         bool includes_driver,
         bool leather_interior
     );
-
-    double penalty(int extradays) const override;
     void displayData() const override;
 };
 
@@ -93,12 +85,9 @@ public:
         int caps,
         const std::string& name,
         int daily_rate,
-        int days,
         const std::string& transmission_type,
         int trunk_capacity
     );
-
-    double penalty(int extradays) const override;
     void displayData() const override;
 };
 
