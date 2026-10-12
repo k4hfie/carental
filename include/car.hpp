@@ -12,7 +12,7 @@ private:
     int capacity;
     int daily_rate;
     int total_days;
-    
+
 protected:
     //helper functoin
     bool isNegative(int num, const std::string& type) const;
@@ -30,7 +30,7 @@ public:
     virtual ~Car();
     virtual void displayData() const = 0;
     void changeRate(int new_rate);
-    void setDay(int days);
+    bool setDay(int days);
     double calculatePrice() const;
     friend class Cart;
     friend class Rental;

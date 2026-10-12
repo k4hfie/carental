@@ -22,7 +22,8 @@ Car::Car(
     available(true),
     name(n),
     capacity(caps),
-    daily_rate(rate)
+    daily_rate(rate),
+    total_days(0)
 {
     // Checks for negative values;
     if (isNegative(license, "License plate")) {
@@ -69,8 +70,14 @@ bool Car::getAvailability() const {
     return available;
 }
 
-void Car::setDay(int day) {
+bool Car::setDay(int day) {
+    if (day <= 0) {
+        std::cerr << "Error: Rental duration must be greater than 0.\n";
+        return false;
+    }
+
     total_days = day;
+    return true;
 }
 
 double Car::calculatePrice() const {

@@ -30,7 +30,7 @@ public:
 };
 
 class EWallet : public Payment {
-public:
+private:
     std::string phoneNumber;
     std::string pin;
 

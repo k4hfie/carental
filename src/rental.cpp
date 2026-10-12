@@ -1,5 +1,6 @@
 #include "rental.hpp"
 #include <iostream>
+#include <limits>
 
 bool Rental::isCarAvaliable(std::unique_ptr<Car>& car){
     return car->getAvailability();
@@ -22,19 +23,30 @@ void Rental::displayCars() const{
     }
 }
 
-void Rental::rentCar(std::unique_ptr<Car>& car){
-    if (!isCarAvaliable(car)){
-        std::cout << "error: Car not Avaliable!\n";
+void Rental::rentCar(std::unique_ptr<Car>& car) {
+    if (!car || !isCarAvaliable(car)) {
+        std::cout << "Error: Car not available!\n";
         return;
     }
 
     int days;
-    std::cout << "Renting: " << car->getName() << "\n";
-    std::cout << "Enter amount of days: "; std::cin >> days;
-    car->setDay(days);
 
-    // do not call displayOptions() after renting a car;
-    // the original car pointer is set to null ptr;
+    std::cout << "Renting: " << car->getName() << "\n";
+    std::cout << "Enter amount of days: ";
+
+    if (!(std::cin >> days)) {
+        std::cin.clear();
+        std::cin.ignore(
+            std::numeric_limits<std::streamsize>::max(), '\n'
+        );
+        std::cout << "Error: Invalid rental duration.\n";
+        return;
+    }
+
+    if (!car->setDay(days)) {
+        return;
+    }
+
     cart.push_back(std::move(car));
 }
 
