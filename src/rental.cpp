@@ -59,7 +59,7 @@ void Rental::processBill(){
         std::cout << item->getName()<< "\t\t\t$" << item->calculatePrice() << "\n";
     }
     std::cout << "--------------------------------------------\n";
-    std::cout << "Total:\t\t\t$" << total <<"\n";
+    std::cout << "Total:\t\t\t\t$" << total <<"\n";
 }
 
 void Rental::processPayment(){
@@ -68,7 +68,8 @@ void Rental::processPayment(){
     std::unique_ptr<Payment> payment;
 
     std::cout << "\nWhich payment method would you like to use?\n";
-    std::cout << "1. Credit Card, 2. Bank Transfer, 3. EWallet, 4. Exit First\n";
+    std::cout << "1. Credit Card, 2. Bank Transfer, 3. EWallet\n";
+    std::cout << "4. Exit First\n";
     std::cout << "--------------------------------------------\n";
     std::cout << "Enter: "; std::cin >> choice; std::cout << "\n";
 

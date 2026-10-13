@@ -13,7 +13,7 @@ int main() {
     ));
 
     cars.push_back(std::make_unique<LuxuryCar>(
-        1002, 2023, 4, "Mercedes-Benz S-Class", 200, true, true
+        1002, 2023, 4, "Mercedes-Benz", 200, true, true
     ));
 
     cars.push_back(std::make_unique<EconomyCar>(
@@ -128,7 +128,7 @@ int main() {
                 std::cout << "New daily rate: ";
                 std::cin >> newRate;
 
-                cars[index]->changeRate(newRate);
+                cars[index]->setRate(newRate);
                 std::cout << "Rate updated\n";
                 break;
             }

@@ -8,11 +8,11 @@ int main() {
     std::vector<std::unique_ptr<Car>> cart;
 
     cars.push_back(std::make_unique<ElectricCar>(
-        1001, 2024, 5, "Tesla", 100, "Type 2", 6.0
+        1001, 2024, 5, "Tesla Model 3", 100, "Type 2", 6.0
     ));
 
     cars.push_back(std::make_unique<LuxuryCar>(
-        1002, 2023, 4, "MercedesB", 200, true, true
+        1002, 2023, 4, "Mercedes Benz", 200, true, true
     ));
 
     cars.push_back(std::make_unique<EconomyCar>(

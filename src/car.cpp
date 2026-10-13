@@ -84,7 +84,7 @@ double Car::calculatePrice() const {
     return total_days * daily_rate;
 }
 
-void Car::changeRate(int new_rate) {
+void Car::setRate(int new_rate) {
     if (isNegative(new_rate, "New rate")) {
         return;
     }

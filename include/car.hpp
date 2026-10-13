@@ -16,6 +16,7 @@ private:
 protected:
     //helper functoin
     bool isNegative(int num, const std::string& type) const;
+    double calculatePrice() const;
 
     //get functions
     int getCapacity() const;
@@ -24,15 +25,13 @@ protected:
     std::string getName() const;
     int getDailyRate() const;
     bool getAvailability() const;
+    bool setDay(int days);
     
 public:
     Car(int license, int yr, int caps, const std::string& n, int rate);
     virtual ~Car();
+    void setRate(int new_rate);
     virtual void displayData() const = 0;
-    void changeRate(int new_rate);
-    bool setDay(int days);
-    double calculatePrice() const;
-    friend class Cart;
     friend class Rental;
 };
 
